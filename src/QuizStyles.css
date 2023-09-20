@@ -1,0 +1,19 @@
+/* styles.css */
+
+.QuestionPreview {
+    /* Default styles for all grid elements */
+    /* Add your default styles here */
+  }
+  
+  .isAnswered {
+    /* Styles for isAnswered grid elements */
+    /* Add your styles for isAnswered elements here */
+    background-color: lightgrey; /* Change this to your desired color */
+  }
+  
+  .isStarted {
+    /* Styles for isStarted grid elements */
+    /* Add your styles for isStarted elements here */
+    background-color: orange; /* Change this to your desired color */
+  }
+  

@@ -1,32 +1,65 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { QuizContext } from './QuizContext.jsx';
 
 export default function DefaultView() {
-    // This is the default view when opening the application.
-    // It contains a Title "Quiz" and allows to add teams one by one
-    // A team should be added with a name in a new line 
-    // At the bottom there should be a "+", when clicked a new row appears such that a new team can be added.
+    const getRandomColor = () => {
+        return '#' + Math.floor(Math.random()*16777215).toString(16);
+    }
 
-    const [team, setTeams] = useState([])
+    const navigate = useNavigate();
+    const globalContext = useContext(QuizContext);
 
-    const addTeam = () => {
-        setTeams([...team, { name: "", score: 0 }])
+    const addNewTeamToArray = () => {
+        globalContext.setTeams([...globalContext.teams, {name: "", color: getRandomColor(), score: 0}])
+    }
+
+    const editTeamEntry = (event, index) => {
+        let t = [...globalContext.teams]
+        t[index].name = event.target.value
+        globalContext.setTeams(t)
+    }
+
+    const editTeamColor = (event, index) => {
+        let t = [...globalContext.teams]
+        t[index].color = event.target.value
+        globalContext.setTeams(t)
+    }
+
+    const startQuiz = () => {
+        navigate('/quiz');
+    }
+
+    const renderTeamsInput = () => {
+        return (
+            <div>
+                {globalContext.teams.map((team, i) => {
+                    return (
+                        <div key={i}>
+                            <input type="text" placeholder="Team Name" key = {"name_"+i} value={team.name} onChange={e => editTeamEntry(e, i)}/>
+                            <input type="color" value={team.color} key={"color_"+i} onChange={e => editTeamColor(e, i)} />
+                            <button key={"delete_key_"+i} onClick={() => {
+                                let t = [...globalContext.teams]
+                                t.splice(i, 1)
+                                globalContext.setTeams(t)
+                            }}>-</button>
+                        </div>
+                    )
+                })}
+            </div>
+        )
     }
 
     return (
         <div>
             <h1>Quiz</h1>
-
+            {renderTeamsInput()}
             <div>
-                <input type="text" placeholder="Team Name" />
+                <button onClick={addNewTeamToArray}>+</button>
             </div>
             <div>
-                <button onClick={addTeam}>+</button>
+                <button onClick={startQuiz}>Start Quiz</button>
             </div>
         </div>
     )
-
-
-
-
-
 }

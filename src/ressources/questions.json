@@ -1,0 +1,42 @@
+[
+    {"question": "Sample Question 1", "category": "Science", "points": 10, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 1"},
+    {"question": "Sample Question 2", "category": "Math", "points": 20, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 2"},
+    {"question": "Sample Question 3", "category": "History", "points": 30, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 3"},
+    {"question": "Sample Question 4", "category": "Geography", "points": 40, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 4"},
+    {"question": "Sample Question 5", "category": "Literature", "points": 50, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 5"},
+    {"question": "Sample Question 6", "category": "Music", "points": 60, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 6"},
+    {"question": "Sample Question 7", "category": "Art", "points": 70, "possibleAnswers": ["A", "B", "C", "D"], "correctAnswerIndex": 1, "additionalInfo": "Info 7"},
+    {"question": "Sample Question 8", "category": "Sports", "points": 80, "possibleAnswers": ["A", "B", "C", "D"], 
+"correctAnswerIndex": 1, 
+"additionalInfo":"Info8"},
+    {"question": "Sample Question 9", "category":"Movies","points" :90,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :1,"additionalInfo":"Info9"},
+    {"question": "Sample Question A", "category":"Technology","points" :100,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :1,"additionalInfo":"Info10"},
+    {"question": "Sample Question B", "category":"Physics","points" :110,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info11"},
+    {"question": "Sample Question C", "category":"Chemistry","points" :120,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info12"},
+    {"question": "Sample Question D", "category":"Biology","points" :130,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info13"},
+    {"question": "Sample Question E", "category":"Computer Science","points" :140,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info14"},
+    {"question": "Sample Question F", "category":"Philosophy","points" :150,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info15"},
+    {"question": "Sample Question G", "category":"Psychology","points" :160,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info16"},
+    {"question": "Sample Question H", "category":"Sociology","points" :170,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info17"},
+    {"question": "Sample Question I", "category":"Economics","points" :180,"possibleAnswers":["A","B","C","D"],"correctAnswerIndex" :2,"additionalInfo":"info18"},
+    {"question": "Sample Question J", "category":"Politics",
+    	"points" :190,
+    	"possibleAnswers":["A",
+    	"B",
+    	"C",
+    	"D"],
+    	"correctAnswerIndex" :2,
+    	"additionalInfo":"info19"
+},
+{"question": "Sample Question K", "category":"Culture",
+		"points" :200,
+		"possibleAnswers":["A",
+		"B",
+		"C",
+		"D"],
+		"correctAnswerIndex":
+		2,
+		"additionalInfo":
+		"info20"
+}
+]

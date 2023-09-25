@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 import questionsFromDisk from './ressources/questions.json'
-
+import { shuffleQuestions } from './utils';
 
 export const QuizContext = createContext();
 
@@ -18,21 +18,27 @@ export const QuizProvider = ({ children }) => {
     }));
 
     const amountOfQuestions = 5;
+    const amountOfRounds = 2;
     // State for teams: Load from LocalStorage or use default value 
     const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')) || [{ name: "", color: '#000000', score: 0 }]);
+    // State for max allowed teams
+    const [maxAllowedTeams, setMaxAllowedTeams] = useState(-1);
     //State for CurrentTurn: Load from LocalStorage or use default value (0)
     const [currentTurn, setCurrentTurn] = useState(JSON.parse(localStorage.getItem('currentTurn')) || 0);
     // State for questions: Load from LocalStorage or load from JSON file (questions.json)
-    const [questions, setQuestions] = useState(JSON.parse(localStorage.getItem('questions')) || extendedQuestionsFromDisk);
-    //State for questions which are used in the current game
+    const [questions, setQuestions] = useState(JSON.parse(localStorage.getItem('questions')) || shuffleQuestions(extendedQuestionsFromDisk));
+    //State for questions which are used in the current game. This is nested array with the following structure: [[question1, question2, question3, question4, question5], [question1, question2, question3, question4, question5]]
     const [gameQuestions, setGameQuestions] = useState(JSON.parse(localStorage.getItem('gameQuestions')) || []);
-    //State for questions which were already used in a previous game or are used in the current game
-    const [usedQuestions, setUsedQuestions] = useState(JSON.parse(localStorage.getItem('usedQuestions')) || []);
     //State for current round
-    const [currentRound, setCurrentRound] = useState(1);
+    const [currentRound, setCurrentRound] = useState(JSON.parse(localStorage.getItem('currentRound')) || 0);
+    //State for the current question
+    const [currentQuestion, setCurrentQuestion] = useState(JSON.parse(localStorage.getItem('currentQuestion')) || null);
+
+
 
     useEffect(() => {
         localStorage.setItem('teams', JSON.stringify(teams));
+        console.dir(teams)
     }, [teams]);
 
     useEffect(() => {
@@ -41,60 +47,44 @@ export const QuizProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem('questions', JSON.stringify(questions));
+        //Additionally, update the number of max allowed teams
+        if (questions.length === 0) setMaxAllowedTeams(-1)
+        else setMaxAllowedTeams(Math.floor(questions.length / (amountOfQuestions * amountOfRounds)));
+
     }, [questions]);
 
     useEffect(() => {
         localStorage.setItem('gameQuestions', JSON.stringify(gameQuestions));
-        console.warn("Updated Game Questions")
     }, [gameQuestions]);
-
-    useEffect(() => {
-        localStorage.setItem('usedQuestions', JSON.stringify(usedQuestions));
-    }, [usedQuestions]);
 
     useEffect(() => {
         localStorage.setItem('currentRound', JSON.stringify(currentRound));
     }, [currentRound]);
 
+    useEffect(() => {
+        localStorage.setItem('currentQuestion', JSON.stringify(currentQuestion));
+    }, [currentQuestion]);
+
+
     // Update game questions and used questions
-    const updateGameAndUsedQuestions = () => {
+    const generateGameQuestions = () => {
         let _gameQuestions = [];
-        let _questions = questions.filter(question => !usedQuestions.includes(question));
 
         // Make a copy of _questions so that we can safely modify it
-        let availableQuestions = [..._questions];
-
-        for (let i = 0; i < teams.length; i++) {
-            for (let j = 0; j < amountOfQuestions; j++) {
-                if (availableQuestions.length === 0) {
-                    // If we run out of available questions, shuffle them again
-                    availableQuestions = [..._questions];
+        let availableQuestions = [...questions];
+        for (let h = 0; h < amountOfRounds; h++) {
+            let _ronudQuestions = [];
+            for (let i = 0; i < teams.length; i++) {
+                for (let j = 0; j < amountOfQuestions; j++) {
+                    let randomIndex = Math.floor(Math.random() * availableQuestions.length);
+                    let _question = availableQuestions.splice(randomIndex, 1)[0];
+                    _ronudQuestions.push(_question);
                 }
-
-                let randomIndex = Math.floor(Math.random() * availableQuestions.length);
-                let _question = availableQuestions.splice(randomIndex, 1)[0];
-                _gameQuestions.push(_question);
             }
+            _gameQuestions.push(_ronudQuestions)
         }
-
         setGameQuestions(_gameQuestions);
     };
-
-    useEffect(() => {
-        // If Questions is loaded: Take a subset of 5 questions per team
-        if (questions.length > 0 && gameQuestions.length !== teams.length * amountOfQuestions) {
-            updateGameAndUsedQuestions();
-        }
-
-    }, [questions, teams]);
-
-    useEffect(() => {
-        // Update game questions and used questions when current round changes
-        if (currentRound > 1) {
-            updateGameAndUsedQuestions();
-            setUsedQuestions(usedQuestions.concat(gameQuestions));
-        }
-    }, [currentRound]);
 
     // Define the reset function
     const resetQuiz = () => {
@@ -104,13 +94,12 @@ export const QuizProvider = ({ children }) => {
         // Reset all states
         setTeams([{ name: "", color: '#000000', score: 0 }]);
         setCurrentTurn(0);
-        setQuestions(extendedQuestionsFromDisk);  // Set questions back to initial value
+        setQuestions(shuffleQuestions(extendedQuestionsFromDisk));  // Set questions back to initial value
         setGameQuestions([]);
-        setUsedQuestions([]);
     };
 
     return (
-        <QuizContext.Provider value={{ teams, setTeams, currentTurn, setCurrentTurn, questions, setQuestions, gameQuestions, setGameQuestions, usedQuestions, setUsedQuestions, resetQuiz }}>
+        <QuizContext.Provider value={{ teams, setTeams, currentTurn, setCurrentTurn, questions, setQuestions, gameQuestions, setGameQuestions, resetQuiz, currentRound, setCurrentRound, generateGameQuestions, maxAllowedTeams, currentQuestion, setCurrentQuestion }}>
             {children}
         </QuizContext.Provider>
     );

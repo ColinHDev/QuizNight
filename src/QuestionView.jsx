@@ -1,20 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { QuizContext } from './QuizContext.jsx';
+import QuizBody from './layout/QuizBody.jsx';
 
 
 export default function QuestionView() {
     const navigate = useNavigate();
-    const location = useLocation();
+    let location = useLocation();
     const globalContext = useContext(QuizContext);
-    const question = location.state.question;
 
-    const [showAdditionalInfo, setShowAdditionalInfo] = useState(location.state.question.isAnswered);
-    const [secondChance, setSecondChance] = useState(location.state.question.answerOfFirstTeam !== null);
+    let question = location.state.question;
+    let questionFromGameQuestions = globalContext.gameQuestions[globalContext.currentRound].find(q => q.question === question.question);
+    if (question.answerOfFirstTeam === null && questionFromGameQuestions.answerOfFirstTeam !== null) {
+        question.answerOfFirstTeam = questionFromGameQuestions.answerOfFirstTeam;
+        question.answerOfSecondTeam = questionFromGameQuestions.answerOfSecondTeam;
+        question.isAnswered = questionFromGameQuestions.isAnswered;
+    }
+
+    const [showAdditionalInfo, setShowAdditionalInfo] = useState(question.isAnswered);
+    const [secondChance, setSecondChance] = useState(question.answerOfFirstTeam !== null);
 
     const handleAnswer = (answerIndex) => {
         // Fix which teams are allowed to answer in which order
-
+        const teams = [...globalContext.teams];
         //If the first team has already answered, the second team is allowed to answer
         if (!secondChance) {
             question.answerOfFirstTeam = answerIndex;
@@ -22,80 +30,87 @@ export default function QuestionView() {
             question.answerOfSecondTeam = answerIndex;
             question.isAnswered = true;
         }
-
+        // Correct answer
         if (question.correctAnswerIndex === answerIndex) {
-            // Correct answer
-            globalContext.teams[globalContext.currentTurn].points += secondChance ? question.points / 2 : question.points;
+            if (!secondChance) {
+                teams[question.firstTeamToAnswer].score += question.points;
+            } else {
+                teams[question.secondTeamToAnswer].score += question.points / 2
+            }
             setShowAdditionalInfo(true);
             question.isAnswered = true;
-        } else {
-            // Wrong answer (cannot go below 0)
+        }
+        // Wrong answer (cannot go below 0)
+        else {
             if (!secondChance) {
-                globalContext.teams[globalContext.currentTurn].points = Math.max(globalContext.teams[globalContext.currentTurn].points - question.points / 2, 0);
+                teams[question.firstTeamToAnswer].score = Math.max(teams[question.firstTeamToAnswer].score - question.points / 2, 0);
                 setSecondChance(true);
             } else {
                 setShowAdditionalInfo(true);
             }
         }
         updateGameQuestions(question);
+        location.state.question = question;
+        globalContext.setTeams(teams);
     }
 
     const updateGameQuestions = (question) => {
-        const allGameQuestions = [...globalContext.gameQuestions];
+        const allGameQuestions = [...globalContext.gameQuestions[globalContext.currentRound]];
         const questionIndex = allGameQuestions.findIndex(q => q.question === question.question);
         allGameQuestions[questionIndex] = question;
-        globalContext.setGameQuestions(allGameQuestions);
+        const gameQuestions = [...globalContext.gameQuestions];
+        gameQuestions[globalContext.currentRound] = allGameQuestions;
+        globalContext.setGameQuestions(gameQuestions);
     }
 
     return (
-        <div>
-            <h1>Question</h1>
+        <div className="flex flex-col items-center justify-center">
+            <QuizBody></QuizBody>
             {question.firstTeamToAnswer !== null && question.secondTeamToAnswer !== null && (
-                <h2>
+                <h2 className="text-center text-2xl p-2">
                     Diese Frage gehört Team "{globalContext.teams[question.firstTeamToAnswer].name}"
                     Wenn Team "{globalContext.teams[question.firstTeamToAnswer].name}" falsch liegt, darf Team "{globalContext.teams[question.secondTeamToAnswer].name}" antworten!
                 </h2>
             )}
-            <p>Category: {question.category}</p>
-            <p>Points: {question.points}</p>
-            <p>Question: {question.question}</p>
-            {question.possibleAnswers.map((answer, index) => (
-                <button
-                    key={index}
-                    onClick={() => handleAnswer(index)}
-                    disabled={showAdditionalInfo || (secondChance && question.answerOfFirstTeam === index) || (question.answerOfFirstTeam === index || question.answerOfSecondTeam === index)}
-                    style={{
-                        backgroundColor: showAdditionalInfo ?
-                            (question.correctAnswerIndex === index ? 'lightgreen' :
+            <h2 className="text-center text-5xl p-2">Question: {question.question}</h2>
+            <p className="text-center text-2xl p-2">Kategorie: {question.category}, Erreichbare Punktzahl: {question.points}</p>
+
+            <div className="flex flex-col items-center justify-center">
+                {question.possibleAnswers.map((answer, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handleAnswer(index)}
+                        disabled={question.isAnswered || (secondChance && question.answerOfFirstTeam === index) || (question.answerOfFirstTeam === index || question.answerOfSecondTeam === index)}
+                        className={`w-64 h-16 rounded-md text-black font-bold text-lg my-4 border-black border-opacity-100 border ${question.isAnswered ?
+                            (question.correctAnswerIndex === index ? 'bg-green-500' :
                                 ((question.answerOfFirstTeam !== null && question.answerOfFirstTeam === index) ||
                                     (question.answerOfSecondTeam !== null && question.answerOfSecondTeam === index) ?
-                                    (question.correctAnswerIndex === index ? 'lightgreen' : 'lightcoral') : ''))
+                                    (question.correctAnswerIndex === index ? 'bg-green-500' : 'bg-red-500') : 'bg-gray-500'))
                             : ((question.answerOfFirstTeam !== null && question.answerOfFirstTeam === index) ||
-                                (question.answerOfSecondTeam !== null && question.answerOfSecondTeam === index) ? 'lightcoral' : '')
-                    }}
+                                (question.answerOfSecondTeam !== null && question.answerOfSecondTeam === index) ? 'bg-red-500' : 'bg-white')} ${question.isAnswered || (secondChance && question.answerOfFirstTeam === index) || (question.answerOfFirstTeam === index || question.answerOfSecondTeam === index) ? '' : 'hover:bg-gray-600'}`}
+                    >
+                        {answer}
+                    </button>
+                ))}
+            </div>
+            <>
+                {question.answerOfFirstTeam !== null && (
+                    <p className="text-center text-lg">Antwort von Team {globalContext.teams[question.firstTeamToAnswer].name}: {question.answerOfFirstTeam + 1}.</p>
+                )}
+                {question.answerOfSecondTeam !== null && (
+                    <p className="text-center text-lg">Antwort von Team {globalContext.teams[question.secondTeamToAnswer].name}: {question.answerOfSecondTeam + 1}.</p>
+                )}
+                {question.isAnswered && (
+                    <>
+                        <p className="text-center text-lg">Korrekte Antwort {question.correctAnswerIndex + 1}.</p>
+                        <p className="text-center text-lg">Kontext: {question.additionalInfo}</p>
+                    </>
+                )}
 
-                >
-                    {answer}
-                </button>
-            ))}
-
-            {showAdditionalInfo && (
-                <>
-                    {question.answerOfFirstTeam !== null && (
-                        <p>Team {globalContext.teams[question.firstTeamToAnswer].name} has answered with option {question.answerOfFirstTeam + 1}.</p>
-                    )}
-                    {question.answerOfSecondTeam !== null && (
-                        <p>Team {globalContext.teams[question.firstTeamToAnswer].name} has answered with option {question.answerOfSecondTeam + 1}.</p>
-                    )}
-                    {question.isAnswered && (
-                        <p>The Correct option for this question is {question.correctAnswerIndex + 1}.</p>
-                    )}
-                    <p>Additional Info: {question.additionalInfo}</p>
-                </>
-            )}
+            </>
             <button onClick={() => {
                 navigate('/quiz');
-            }}>Back to Quiz</button>
+            }} className="w-64 h-16 rounded-md text-white font-bold text-lg my-4 bg-gray-800">Back to Quiz</button>
         </div>
     )
 }

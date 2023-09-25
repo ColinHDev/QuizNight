@@ -1,0 +1,215 @@
+[
+	{
+		"question": "Von wem wurde die erste offizielle Webseite programmiert?", 
+		"category": "Informatik", 
+		"points": 30, 
+		"possibleAnswers": ["Tim Berners-Lee", "Larry Sanger", "Chad Hurley", "Pawel Durow"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "In welchem Jahr wurde das erste YouTube-Video hochgeladen?", 
+		"category": "Informatik", 
+		"points": 20, 
+		"possibleAnswers": ["2005", "2004", "2006", "2003"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Seit wann gibt es die Firma Netflix?", 
+		"category": "Informatik", 
+		"points": 20, 
+		"possibleAnswers": ["1997", "1991", "2006", "2014"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wann wurde die erste Computermaus hergestellt?", 
+		"category": "Informatik", 
+		"points": 20, 
+		"possibleAnswers": ["1964", "1978", "2001", "1993"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wer gilt als Erfinder des ersten Computers der Welt?", 
+		"category": "Informatik", 
+		"points": 20, 
+		"possibleAnswers": ["Konrad Zuse", "Alan Turing", "Charles Babbage", "Joseph Weizenbaum"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie viel Speicherplatz hatte die erste Festplatte von 1979?", 
+		"category": "Informatik", 
+		"points": 20, 
+		"possibleAnswers": ["5 MB", "2 GB", "256 KB", "512 MB"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wofür steht das \"P\" im Akronym \"CAPTCHA\"?", 
+		"category": "Informatik", 
+		"points": 20, 
+		"possibleAnswers": ["Public", "Program", "Protocol", "Principle"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	
+	
+	
+	{
+		"question": "Otto von Guericke war neben Physiker ebenfalls was zu seinen Lebzeiten?", 
+		"category": "Magdeburg", 
+		"points": 30, 
+		"possibleAnswers": ["Politiker", "Schriftsteller", "Mediziner", "Mathematiker"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie viele Einwohner hat Magdeburg (Stand 2022)?", 
+		"category": "Magdeburg", 
+		"points": 20, 
+		"possibleAnswers": ["239.364", "197.523", "283.428", "309.166"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie viele Stadtteile hat Magdeburg?", 
+		"category": "Magdeburg", 
+		"points": 20, 
+		"possibleAnswers": ["40", "30", "20", "10"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie heißt der/die amtierende Oberbügermeister*in von Magdeburg (Stand 2023)?", 
+		"category": "Magdeburg", 
+		"points": 20, 
+		"possibleAnswers": ["Simone Borris", "Jens Rösler", "Till Isenhuth", "Tobias Krull"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie hieß der Kaiser des Heiligen Römischen Reiches deutscher Nation, mit dem Magdeburg in Verbindung steht?", 
+		"category": "Magdeburg", 
+		"points": 30, 
+		"possibleAnswers": ["Otto I.", "Friedrich II.", "Konrad III.", "Heinrich IV."], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie groß ist die Fläche von Magdeburg?", 
+		"category": "Magdeburg", 
+		"points": 20, 
+		"possibleAnswers": ["210km^2", "194km^2", "159km^2", "238km^2"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie heißt der Fluss, der durch Magdeburg fließt?", 
+		"category": "Magdeburg", 
+		"points": 10, 
+		"possibleAnswers": ["Elbe", "Saale", "Mulde", "Wipper"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	
+	
+	
+	{
+		"question": "Wie viele Studierende hat die OvGU (Stand WiSe 22/23)?", 
+		"category": "OvGU", 
+		"points": 20, 
+		"possibleAnswers": ["12.833", "14.427", "11.935", "13.156"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie viele Bachelorstudiengänge gibt es es an der OvGU (Stand WiSe 23/24)?", 
+		"category": "OvGU", 
+		"points": 30, 
+		"possibleAnswers": ["49", "39", "29", "59", "69"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie viele Masterstudiengänge gibt es an der OvGU (Stand WiSe 23/24)?", 
+		"category": "OvGU", 
+		"points": 30, 
+		"possibleAnswers": ["49", "39", "29", "59", "69"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie viele Fakultäten hat die OvGU?", 
+		"category": "OvGU", 
+		"points": 10, 
+		"possibleAnswers": ["9", "7", "5", "11"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": "Maschinenbau, Verfahrungs- und Systemtechnik, Elektrotechnik und Informationstechnik, Informatik, Mathematik, Naturwissenschaften, Medizin, Humanwissenschaften, Wirtschaftswissenschaft"
+	},
+	{
+		"question": "Wie heißt der Club, der auf dem Campus liegt?", 
+		"category": "OvGU", 
+		"points": 10, 
+		"possibleAnswers": ["Baracke", "Spelunke", "Kater Blau", "Ottoclub", "Blauer Otto"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wie heißt der Studentenclub der Mediziner?", 
+		"category": "OvGU", 
+		"points": 20, 
+		"possibleAnswers": ["Kiste", "Krankenwagen", "Amnesie", "Tropf"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},{
+		"question": "Wie heißt der/die Rektor*in der OvGU (Stand WiSe 23/24)?", 
+		"category": "OvGU", 
+		"points": 20, 
+		"possibleAnswers": ["Jens Strackeljan", "Angela Matthies", "Helmut Weiß", "Susanne Schmidt"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "In welchem Magdeburger Stadtteil befindet sich der Hauptcampus der OvGU?", 
+		"category": "OvGU", 
+		"points": 10, 
+		"possibleAnswers": ["Alte Neustadt", "Altstadt", "Universitätsviertel", "Sudenburg"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Was bedeutet die Abkürzung \"URZ\"?", 
+		"category": "OvGU", 
+		"points": 10, 
+		"possibleAnswers": ["Universitätsrechenzentrum", "Universitätsradiozentrum", "Universitätsrobotikzentrum", "Universitätsraumzuteilung"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wer gilt als Erfinder des ersten Computers der Welt?", 
+		"category": "OvGU", 
+		"points": 20, 
+		"possibleAnswers": ["Konrad Zuse", "Alan Turing", "Charles Babbage", "Joseph Weizenbaum"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wer gilt als Erfinder des ersten Computers der Welt?", 
+		"category": "OvGU", 
+		"points": 20, 
+		"possibleAnswers": ["Konrad Zuse", "Alan Turing", "Charles Babbage", "Joseph Weizenbaum"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	},
+	{
+		"question": "Wer gilt als Erfinder des ersten Computers der Welt?", 
+		"category": "OvGU", 
+		"points": 20, 
+		"possibleAnswers": ["Konrad Zuse", "Alan Turing", "Charles Babbage", "Joseph Weizenbaum"], 
+		"correctAnswerIndex": 0, 
+		"additionalInfo": ""
+	}
+]

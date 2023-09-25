@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import WelcomeView from './WelcomeView.jsx'
 import QuizGridView from './QuizGridView.jsx'
 import QuestionView from './QuestionView.jsx'
+import FinalResultsView from './FinalResultsView.jsx'
 
-import {QuizProvider}  from './QuizContext.jsx'
+import { QuizProvider } from './QuizContext.jsx'
 
 import QuizHeader from './layout/QuizHeader.jsx'
 
@@ -15,12 +16,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <QuizProvider>
-        <QuizHeader></QuizHeader>
-        <Routes>
-          <Route path="/" element={<WelcomeView />} />
-          <Route path="/quiz" element={<QuizGridView />} />
-          <Route path="/question" element={<QuestionView />} />
-        </Routes>
+        <div className='overflow-hidden relative h-screen'>
+          <QuizHeader></QuizHeader>
+          <Routes>
+            <Route path="/" element={<WelcomeView />} />
+            <Route path="/quiz" element={<QuizGridView />} />
+            <Route path="/question" element={<QuestionView />} />
+            <Route path="/results" element={<FinalResultsView />} />
+          </Routes>
+        </div>
       </QuizProvider>
     </Router>
   </React.StrictMode>,

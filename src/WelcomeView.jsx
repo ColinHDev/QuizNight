@@ -55,71 +55,73 @@ export default function DefaultView() {
 
     }
 
-    const renderTeamsInput = () => {
-        return (
-            <div className="flex flex-col space-y-2">
-                {globalContext.teams.map((team, i) => {
-                    return (
-                        <div key={i} className="flex items-center space-x-2">
-                            <input
-                                type="text"
-                                placeholder="Team Name"
-                                key={"name_" + i}
-                                value={team.name}
-                                onChange={(e) => editTeamEntry(e, i)}
-                                className="border border-gray-300 rounded-md px-2 py-1 w-48"
-                            />
-                            <input
-                                type="color"
-                                value={team.color}
-                                key={"color_" + i}
-                                onChange={(e) => editTeamColor(e, i)}
-                                className="w-8 h-8 rounded-full border-none"
-                                style={{ borderRadius: "50%" }}
-                            />
-                            <button
-                                key={"delete_key_" + i}
-                                onClick={() => {
-                                    let t = [...globalContext.teams];
-                                    t.splice(i, 1);
-                                    globalContext.setTeams(t);
-                                }}
-                                className="bg-black text-white rounded-md px-2 py-1"
-                            >
-                                -
-                            </button>
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    };
-    const renderMaxAllowedTeams = () => {
-        if (globalContext.maxAllowedTeams && globalContext.maxAllowedTeams !== -1) {
+        const renderTeamsInput = () => {
             return (
-                <div>
-                    <p className="text-black"><i>Es können maximal: {globalContext.maxAllowedTeams} Teams erstellt werden!</i></p>
+                <div className="flex flex-col space-y-2">
+                    {globalContext.teams.map((team, i) => {
+                        return (
+                            <div key={i} className="flex items-center space-x-2">
+                                <input
+                                    type="text"
+                                    placeholder="Team Name"
+                                    key={"name_" + i}
+                                    value={team.name}
+                                    onChange={(e) => editTeamEntry(e, i)}
+                                    className="border border-gray-300 rounded-md px-2 py-1 w-48 text-2xl"
+                                />
+                                <input
+                                    type="color"
+                                    value={team.color}
+                                    key={"color_" + i}
+                                    onChange={(e) => editTeamColor(e, i)}
+                                    className="w-8 h-8 rounded-full border-none"
+                                    style={{ borderRadius: "50%" }}
+                                />
+                                <button
+                                    key={"delete_key_" + i}
+                                    onClick={() => {
+                                        let t = [...globalContext.teams];
+                                        t.splice(i, 1);
+                                        globalContext.setTeams(t);
+                                    }}
+                                    className="bg-black text-white rounded-md px-2 py-1 text-2xl"
+                                >
+                                    -
+                                </button>
+                            </div>
+                        );
+                    })}
                 </div>
-            )
-        }
-    }
-    return (
-        <div className="h-screen flex justify-center items-center">
-            <div className="h-56 grid grid-cols-1 gap-4 content-start justify-center items-center">
-                <div className="flex flex-col space-y-4 text-center justify-center items-center">
-                    {renderTeamsInput()}
-                    <div className="flex justify-center">
-                        <button onClick={addNewTeamToArray} className="text-white bg-black rounded-md px-4 py-2">Add Team</button>
+            );
+        };
+
+        const renderMaxAllowedTeams = () => {
+            if (globalContext.maxAllowedTeams && globalContext.maxAllowedTeams !== -1) {
+                return (
+                    <div>
+                        <p className="text-black text-2xl"><i>Es können maximal {globalContext.maxAllowedTeams} Teams erstellt werden!</i></p>
                     </div>
-                    {renderMaxAllowedTeams()}
-                    <div className="flex justify-center">
-                        <button disabled={!isValidTeamEntries()} onClick={startQuiz} className="bg-green-500 text-white rounded-md px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed">Start Quiz</button>
+                )
+            }
+        }
+
+        return (
+            <div className=" pt-4 flex justify-center items-center">
+                <div className="grid grid-cols-1 gap-4 content-start justify-center items-center">
+                    <div className="flex flex-col space-y-4 text-center justify-center items-center">
+                        {renderTeamsInput()}
+                        <div className="flex justify-center">
+                            <button onClick={addNewTeamToArray} className="text-white bg-black rounded-md px-4 py-2 text-2xl">Add Team</button>
+                        </div>
+                        {renderMaxAllowedTeams()}
+                        <div className="flex justify-center">
+                            <button disabled={!isValidTeamEntries()} onClick={startQuiz} className="bg-green-500 text-white rounded-md px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed text-2xl">Start Quiz</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
 
-}
+    }
 
 

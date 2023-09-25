@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { QuizContext } from './QuizContext.jsx'
 
 import './ressources/css/QuizStyles.css'
-import Scoreboard from './components/Scoreboard.jsx';
 import ChangeGrid from './components/ChangeGrid.jsx';
 import QuizBody from './layout/QuizBody.jsx';
 
@@ -77,8 +76,8 @@ export default function Quiz() {
                                     hoveredIndex === index ? "bg-gray-600 transition-colors duration-300" : ""
                                 }`}
                             >
-                                <p>{question.category}</p>
-                                <p>{question.points}</p>
+                                <p className="text-4xl">{question.category}</p>
+                                <p className="text-4xl">{question.points}</p>
                             </div>
                         )
                     )}
@@ -98,14 +97,17 @@ export default function Quiz() {
             <QuizBody></QuizBody>
             <div className="flex justify-center items-center">
                 <div className='w-full text-center'>
-                    <h1 className="text-3xl">Die nächste Frage geht an Team: {globalContext.teams[globalContext.currentTurn].name}</h1>
+                    <h1 className="text-3xl m-3">Team <b>"{globalContext.teams[globalContext.currentTurn].name}"</b> ist dran!</h1>
                     {renderQuizGrid()}
                     <div className="flex justify-between">
-                        <div className="flex">
+                        <div className="flex p-4">
                             <button onClick={resetQuiz} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Reset Quiz
                             </button>
                             <ChangeGrid></ChangeGrid>
+                            <button onClick={() => {navigate("/results")}} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                                Ergebnisse
+                            </button>
                         </div>
                     </div>
                 </div>

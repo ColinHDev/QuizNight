@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-import questionsFromDisk from './ressources/questions.json'
+import questionsFromDisk from './ressources/realQuestions.json'
 import { shuffleQuestions } from './utils';
+import { getRandomColor } from './utils';
 
 export const QuizContext = createContext();
 
@@ -16,11 +17,10 @@ export const QuizProvider = ({ children }) => {
         secondTeamToAnswer: null,
         answerOfSecondTeam: null
     }));
-
     const amountOfQuestions = 5;
     const amountOfRounds = 2;
     // State for teams: Load from LocalStorage or use default value 
-    const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')) || [{ name: "", color: '#000000', score: 0 }]);
+    const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')) || [{ name: "", color: "#E23D32", score: 0 }]);
     // State for max allowed teams
     const [maxAllowedTeams, setMaxAllowedTeams] = useState(-1);
     //State for CurrentTurn: Load from LocalStorage or use default value (0)
@@ -38,7 +38,6 @@ export const QuizProvider = ({ children }) => {
 
     useEffect(() => {
         localStorage.setItem('teams', JSON.stringify(teams));
-        console.dir(teams)
     }, [teams]);
 
     useEffect(() => {
@@ -92,7 +91,7 @@ export const QuizProvider = ({ children }) => {
         localStorage.clear();
 
         // Reset all states
-        setTeams([{ name: "", color: '#000000', score: 0 }]);
+        setTeams([{ name: "", color: '#E23D32', score: 0 }]);
         setCurrentTurn(0);
         setQuestions(shuffleQuestions(extendedQuestionsFromDisk));  // Set questions back to initial value
         setGameQuestions([]);

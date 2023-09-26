@@ -43,7 +43,7 @@ export default function FinalResultsView() {
 
     return (
         <div className="relative h-screen overflow-hidden">
-            {globalContext.gameQuestions && !isQuizFinished(globalContext.gameQuestions) && springs.map((props, index) => (
+            {globalContext.gameQuestions && isQuizFinished(globalContext.gameQuestions) && springs.map((props, index) => (
                 <animated.div
                     key={index}
                     style={{

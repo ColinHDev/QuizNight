@@ -11,7 +11,7 @@ export default function ChangeGrid() {
     // If not all questions of a round are answered, the corresponding button is disabled
     const globalContext = React.useContext(QuizContext)
     const leftArrowDisabled = globalContext.currentRound === 0
-    const rightArrowDisabled = globalContext.currentRound === globalContext.amountOfRounds - 1 || !isRoundFinished(globalContext.gameQuestions[globalContext.currentRound])
+    const rightArrowDisabled = globalContext.currentRound === globalContext.amountOfRounds - 1 && !isRoundFinished(globalContext.gameQuestions[globalContext.currentRound])
     return (
         <div>
             <button className="ml-2 bg-blue-500 hover:bg-blue-700 disabled:bg-blue-200 text-white font-bold py-2 px-4 rounded" disabled={leftArrowDisabled} onClick={() => globalContext.setCurrentRound(globalContext.currentRound - 1)}>{"<"}</button>
